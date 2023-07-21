@@ -41,24 +41,4 @@ class NetworkManager {
             }
         }.resume()
     }
-    
-    func fetchImage(for superhero: Superhero, completion: @escaping (Result<Data, NetworkError>) -> Void) {
-        guard let url = URL(string: superhero.images.lg) else {
-            completion(.failure(.invalidUrl))
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data else {
-                print(error?.localizedDescription ?? "No error description")
-                completion(.failure(.noData))
-                return
-            }
-            
-            DispatchQueue.main.async {
-                completion(.success(data))
-            }
-            
-        }.resume()
-    }
 }
