@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CollectionViewController: UICollectionViewController {
     
@@ -28,6 +29,14 @@ class CollectionViewController: UICollectionViewController {
         let superhero = superheroes[indexPath.row]
         cell.configure(with: superhero)
         return cell
+    }
+
+    @IBAction func ClearCache(_ sender: UIBarButtonItem) {
+        let cache = ImageCache.default
+        cache.clearMemoryCache()
+        cache.clearDiskCache() {
+            print("Done")
+        }
     }
     
     private func fetchSuperheroes() {
